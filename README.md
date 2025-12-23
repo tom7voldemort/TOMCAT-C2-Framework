@@ -119,7 +119,7 @@ This project is intended strictly for **educational purposes, malware analysis l
 ## Installation
 
 ```bash
-git clone https://github.com/tom7voldemort/TOMCATC2-Frameworks.git
+git clone https://github.com/tom7voldemort/TOMCAT-C2-Framework.git
 cd TOMCATC2-Frameworks
 pip3 install -r requirements.txt
 ```
