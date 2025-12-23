@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOMCAT C2 SERVER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="header-title">TOMCAT C2 SERVER</h1>
+            <p class="header-info">Author: TOM7 | GitHub: tom7voldemort | Born For Exploitation</p>
+        </div>
+
+        <div class="control-panel">
+            <div class="control-row">
+                <span class="control-label">HOST:</span>
+                <input type="text" class="input-host" id="hostInput" value="0.0.0.0">
+                
+                <span class="control-label">PORT:</span>
+                <input type="number" class="input-port" id="portInput" value="4444">
+                
+                <button class="btn btn-start" id="startBtn" onclick="startServer()">START</button>
+                <button class="btn btn-stop" id="stopBtn" onclick="stopServer()" disabled>STOP</button>
+                <button class="btn btn-refresh" onclick="refreshData()">REFRESH</button>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-dot status-offline" id="statusDot"></span>
+                    <span class="status-text" id="statusText">Server Offline</span>
+                </div>
+                <div class="status-item">
+                    <span class="agent-count" id="agentCount">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="server-info" id="serverInfo">Ready</span>
+                </div>
+            </div>
+
+            <div class="key-display" id="keyDisplay" style="display: none;">
+                <strong class="key-label">Encryption Key:</strong>
+                <span class="key-value" id="encryptionKey"></span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="panel panel-agents">
+                <div class="panel-title">
+                    <span class="panel-title-text">CONNECTED AGENTS</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="agents-table">
+                        <thead class="agents-table-head">
+                            <tr class="agents-table-row">
+                                <th class="agents-table-header">ID</th>
+                                <th class="agents-table-header">IP ADDRESS</th>
+                                <th class="agents-table-header">OS</th>
+                                <th class="agents-table-header">HOSTNAME</th>
+                                <th class="agents-table-header">USER</th>
+                                <th class="agents-table-header">ARCH</th>
+                                <th class="agents-table-header">CONNECTED</th>
+                            </tr>
+                        </thead>
+                        <tbody class="agents-table-body" id="agentsTableBody">
+                            <tr class="agents-table-row">
+                                <td class="agents-table-cell" colspan="7" style="text-align: center; color: #ffee00;">No agents connected</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-commands">
+                <div class="panel-title">
+                    <span class="panel-title-text">COMMAND EXECUTION</span>
+                </div>
+                
+                <div class="command-input-area">
+                    <div class="selected-agent-wrapper">
+                        <span class="selected-agent-label">Selected Agent:</span>
+                        <span class="selected-agent-value" id="selectedAgent">None</span>
+                    </div>
+
+                    <div class="quick-commands">
+                        <button class="btn btn-quick" onclick="quickCommand('SYSINFO')">SysInfo</button>
+                        <button class="btn btn-quick" onclick="quickCommand('ls -la')">List</button>
+                        <button class="btn btn-quick" onclick="quickCommand('whoami')">User</button>
+                        <button class="btn btn-quick" onclick="quickCommand('ipconfig')">Network</button>
+                        <button class="btn btn-quick" onclick="quickCommand('tasklist')">Processes</button>
+                        <button class="btn btn-quick" onclick="quickCommand('SCREENSHOT')">Screenshot</button>
+                    </div>
+
+                    <div class="command-row">
+                        <input type="text" class="command-input" id="commandInput" placeholder="Enter command..." onkeypress="handleKeyPress(event)">
+                        <button class="btn btn-execute" onclick="executeCommand()">EXECUTE</button>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <div class="output-header">
+                        <span class="output-title">OUTPUT</span>
+                        <button class="btn btn-clear-log" onclick="clearLog()">CLEAR</button>
+                    </div>
+                    <div class="output-box" id="outputBox">~>> Welcome to TOMCAT C2 Web Interface
+~>> Waiting for server to start...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='core.js') }}"></script>
+</body>
+</html>

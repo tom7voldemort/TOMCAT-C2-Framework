@@ -1,0 +1,4 @@
+colorama
+pysocks
+cryptography.fernet
+tkinter
